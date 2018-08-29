@@ -14,4 +14,6 @@
 + (NSString *)readFromLogFile;
 
 +(void)removeLogFile;
+
++(void)freOpenLogToConsole;
 @end

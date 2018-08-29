@@ -11,6 +11,8 @@
 
 #import "HJSaveLogTool.h"
 #import <UIKit/UIKit.h>
+
+static FILE *fp;
 @implementation HJSaveLogTool
 #pragma mark - 保存日志文件
 + (void)redirectNSLogToDocumentFolder{
@@ -37,6 +39,7 @@
     NSString *dateStr = [formatter stringFromDate:[NSDate date]];
     NSString *logFilePath = [logDirectory stringByAppendingFormat:@"/%@.txt",@"log"];
     // freopen 重定向输出流,将log输入到文件
+    //  printf --> stdout    NSLog --> stderr  stdin是标准输入流，默认为键盘；stdout是标准输出流，默认为屏幕；stderr是标准错误流，一般把屏幕设为默认
     freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stdout);
     freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
 }
@@ -61,6 +64,9 @@
     NSFileManager *fileManage = [NSFileManager defaultManager];
     if ([fileManage fileExistsAtPath:logFilePath]) {
         [fileManage removeItemAtPath:logFilePath error:nil];
+        [self redirectNSLogToDocumentFolder];
     }
+    
 }
+
 @end
