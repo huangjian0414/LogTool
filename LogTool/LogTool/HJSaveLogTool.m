@@ -36,7 +36,7 @@ static FILE *fp;
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     //每次启动后都保存一个新的日志文件中
-    NSString *dateStr = [formatter stringFromDate:[NSDate date]];
+    //NSString *dateStr = [formatter stringFromDate:[NSDate date]];
     NSString *logFilePath = [logDirectory stringByAppendingFormat:@"/%@.txt",@"log"];
     // freopen 重定向输出流,将log输入到文件
     //  printf --> stdout    NSLog --> stderr  stdin是标准输入流，默认为键盘；stdout是标准输出流，默认为屏幕；stderr是标准错误流，一般把屏幕设为默认
