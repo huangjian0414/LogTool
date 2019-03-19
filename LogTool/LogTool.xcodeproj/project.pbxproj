@@ -14,9 +14,8 @@
 		7E28269A213548B9002E8088 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E282698213548B9002E8088 /* LaunchScreen.storyboard */; };
 		7E28269D213548B9002E8088 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28269C213548B9002E8088 /* main.m */; };
 		7E2826A921355370002E8088 /* LogInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2826A32135536F002E8088 /* LogInfoManager.m */; };
-		7E2826AA21355370002E8088 /* LogInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2826A42135536F002E8088 /* LogInfoViewController.m */; };
 		7E2826AB21355370002E8088 /* HJSaveLogTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2826A721355370002E8088 /* HJSaveLogTool.m */; };
-		7EAE1641223A56DC00F4B36B /* LogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAE1640223A56DC00F4B36B /* LogView.m */; };
+		7EBFB2212240DD6E0064AB05 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFB2202240DD6E0064AB05 /* LogViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,13 +30,11 @@
 		7E28269B213548B9002E8088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E28269C213548B9002E8088 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7E2826A32135536F002E8088 /* LogInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInfoManager.m; sourceTree = "<group>"; };
-		7E2826A42135536F002E8088 /* LogInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInfoViewController.m; sourceTree = "<group>"; };
 		7E2826A52135536F002E8088 /* HJSaveLogTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJSaveLogTool.h; sourceTree = "<group>"; };
-		7E2826A62135536F002E8088 /* LogInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInfoViewController.h; sourceTree = "<group>"; };
 		7E2826A721355370002E8088 /* HJSaveLogTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJSaveLogTool.m; sourceTree = "<group>"; };
 		7E2826A821355370002E8088 /* LogInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInfoManager.h; sourceTree = "<group>"; };
-		7EAE163F223A56DC00F4B36B /* LogView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogView.h; sourceTree = "<group>"; };
-		7EAE1640223A56DC00F4B36B /* LogView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogView.m; sourceTree = "<group>"; };
+		7EBFB21F2240DD6E0064AB05 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
+		7EBFB2202240DD6E0064AB05 /* LogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,12 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				7EAE163D223A55CD00F4B36B /* Tool */,
-				7E2826A52135536F002E8088 /* HJSaveLogTool.h */,
-				7E2826A721355370002E8088 /* HJSaveLogTool.m */,
-				7E2826A821355370002E8088 /* LogInfoManager.h */,
-				7E2826A32135536F002E8088 /* LogInfoManager.m */,
-				7E2826A62135536F002E8088 /* LogInfoViewController.h */,
-				7E2826A42135536F002E8088 /* LogInfoViewController.m */,
 				7E28268D213548B8002E8088 /* AppDelegate.h */,
 				7E28268E213548B8002E8088 /* AppDelegate.m */,
 				7E282690213548B8002E8088 /* ViewController.h */,
@@ -93,8 +84,12 @@
 		7EAE163D223A55CD00F4B36B /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				7EAE163F223A56DC00F4B36B /* LogView.h */,
-				7EAE1640223A56DC00F4B36B /* LogView.m */,
+				7EBFB21F2240DD6E0064AB05 /* LogViewController.h */,
+				7EBFB2202240DD6E0064AB05 /* LogViewController.m */,
+				7E2826A52135536F002E8088 /* HJSaveLogTool.h */,
+				7E2826A721355370002E8088 /* HJSaveLogTool.m */,
+				7E2826A821355370002E8088 /* LogInfoManager.h */,
+				7E2826A32135536F002E8088 /* LogInfoManager.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -171,11 +166,10 @@
 			files = (
 				7E2826A921355370002E8088 /* LogInfoManager.m in Sources */,
 				7E2826AB21355370002E8088 /* HJSaveLogTool.m in Sources */,
-				7EAE1641223A56DC00F4B36B /* LogView.m in Sources */,
 				7E282692213548B8002E8088 /* ViewController.m in Sources */,
-				7E2826AA21355370002E8088 /* LogInfoViewController.m in Sources */,
 				7E28269D213548B9002E8088 /* main.m in Sources */,
 				7E28268F213548B8002E8088 /* AppDelegate.m in Sources */,
+				7EBFB2212240DD6E0064AB05 /* LogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

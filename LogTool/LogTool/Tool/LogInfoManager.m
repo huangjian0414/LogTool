@@ -10,6 +10,7 @@
 //
 
 #import "LogInfoManager.h"
+#import "LogViewController.h"
 
 @implementation LogInfoManager
 +(instancetype)shareInstance
@@ -27,18 +28,23 @@
     self.isShowLogVC=YES;
     if (self.logInfoView) {
         self.logInfoView.hidden=NO;
+        [[LogInfoManager shareInstance].logVC startTimer];
     }else
     {
-        self.logInfoView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"logInfo"].view;
+        LogViewController *vc= [[LogViewController alloc]init];
+        self.logVC=vc;
+        self.logInfoView=vc.view;
         [[UIApplication sharedApplication].keyWindow addSubview:self.logInfoView];
         [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.logBtn];
     }
+    
 }
 -(void)dismissLogInfoVC
 {
     self.isShowLogVC=NO;
     if (self.logInfoView) {
         self.logInfoView.hidden=YES;
+        [[LogInfoManager shareInstance].logVC removeTimer];
     }
 }
 

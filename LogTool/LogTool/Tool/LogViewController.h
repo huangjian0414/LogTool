@@ -1,8 +1,8 @@
 //
-//  LogView.h
+//  LogViewController.h
 //  LogTool
 //
-//  Created by huangjian on 2019/3/14.
+//  Created by huangjian on 2019/3/19.
 //  Copyright © 2019年 huangjian. All rights reserved.
 //
 
@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LogView : UIView
+@interface LogViewController : UIViewController
+-(void)startTimer;
 
+-(void)removeTimer;
 @end
 
 NS_ASSUME_NONNULL_END
