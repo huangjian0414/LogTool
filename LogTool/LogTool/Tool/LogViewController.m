@@ -67,9 +67,16 @@
         case 2:
             [self share];
             break;
+        case 3:
+            [self remove];
+            break;
         default:
             break;
     }
+}
+-(void)remove
+{
+    [HJSaveLogTool removeLogFile];
 }
 -(void)share
 {
@@ -156,13 +163,24 @@
     [self.view addSubview:shareBtn];
     shareBtn.translatesAutoresizingMaskIntoConstraints = NO;
     
+    UIButton *removeFileBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [removeFileBtn setTitle:@"Remove" forState:UIControlStateNormal];
+    [removeFileBtn setTitleColor:defalutColor forState:UIControlStateNormal];
+    removeFileBtn.layer.borderColor=defalutColor.CGColor;
+    removeFileBtn.layer.borderWidth=1;
+    removeFileBtn.tag=3;
+    removeFileBtn.contentEdgeInsets=UIEdgeInsetsMake(0, 5, 0, 5);
+    [removeFileBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:removeFileBtn];
+    removeFileBtn.translatesAutoresizingMaskIntoConstraints = NO;
+    
     UITextView *textView=[[UITextView alloc]init];
     textView.editable=NO;
     [self.view addSubview:textView];
     self.textView=textView;
     textView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSArray *constraints1 =[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[hiddenBtn]-padding-[stopBtn]-padding-[shareBtn]" options:0 metrics:@{@"left" : @(20),@"padding":@(10)} views:NSDictionaryOfVariableBindings(hiddenBtn,stopBtn,shareBtn)];
+    NSArray *constraints1 =[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[hiddenBtn]-padding-[stopBtn]-padding-[shareBtn]-padding-[removeFileBtn]" options:0 metrics:@{@"left" : @(20),@"padding":@(10)} views:NSDictionaryOfVariableBindings(hiddenBtn,stopBtn,shareBtn,removeFileBtn)];
     NSArray *constraints2 =[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[hiddenBtn]-space-[textView]-space-|" options:0 metrics:@{@"top":@(85),@"space":@(20)} views:NSDictionaryOfVariableBindings(hiddenBtn,textView)];
     NSArray *constraints3 =[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-space-[textView]-space-|" options:0 metrics:@{@"space":@(20)} views:NSDictionaryOfVariableBindings(hiddenBtn,textView)];
     [self.view addConstraints:constraints1];
@@ -174,6 +192,9 @@
     
     NSLayoutConstraint *shareBtnCenterY=[NSLayoutConstraint constraintWithItem:shareBtn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stopBtn attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
     [self.view addConstraint:shareBtnCenterY];
+    
+    NSLayoutConstraint *removeBtnCenterY=[NSLayoutConstraint constraintWithItem:removeFileBtn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:shareBtn attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    [self.view addConstraint:removeBtnCenterY];
     
     self.view.layer.borderColor=defalutColor.CGColor;
     self.view.layer.borderWidth=3;

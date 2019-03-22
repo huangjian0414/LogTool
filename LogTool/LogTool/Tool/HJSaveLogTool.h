@@ -15,5 +15,5 @@
 
 +(void)removeLogFile;
 
-+(void)freOpenLogToConsole;
+//+(void)freOpenLogToConsole;
 @end

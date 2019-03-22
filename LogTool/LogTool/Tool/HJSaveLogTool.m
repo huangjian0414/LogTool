@@ -12,7 +12,7 @@
 #import "HJSaveLogTool.h"
 #import <UIKit/UIKit.h>
 
-static FILE *fp;
+//static FILE *fp;
 @implementation HJSaveLogTool
 #pragma mark - 保存日志文件
 + (void)redirectNSLogToDocumentFolder{
