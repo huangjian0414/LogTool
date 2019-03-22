@@ -20,6 +20,8 @@
 
 @property(nonatomic,strong)LogViewController *logVC;
 
+-(void)start;
+
 -(void)showLogInfoVC;
 -(void)dismissLogInfoVC;
 @end

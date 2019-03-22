@@ -15,7 +15,6 @@
     CGPoint _firstPoint;
     CGPoint _currentPoint;
 }
-@property (nonatomic,weak)UIButton *btn;
 @end
 
 @implementation AppDelegate
@@ -24,39 +23,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [HJSaveLogTool removeLogFile];
     [HJSaveLogTool redirectNSLogToDocumentFolder];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setTitle:@"Log" forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        btn.titleLabel.font=[UIFont systemFontOfSize:14];
-        btn.frame=CGRectMake(300, 20, 40, 40);
-        [btn setBackgroundColor:[UIColor blackColor]];
-        [btn addTarget:self action:@selector(clickLogBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [self.window addSubview:btn];
-        UIPanGestureRecognizer *pan=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panBtn:)];
-        [btn addGestureRecognizer:pan];
-        self.btn=btn;
-        [LogInfoManager shareInstance].logBtn=btn;
-    });
+    [[LogInfoManager shareInstance]start];
     return YES;
-}
--(void)clickLogBtn:(UIButton *)btn
-{
-    if (![LogInfoManager shareInstance].isShowLogVC) {
-        [[LogInfoManager shareInstance]showLogInfoVC];
-    }else
-    {
-        [[LogInfoManager shareInstance]dismissLogInfoVC];
-    }
-}
-
--(void)panBtn:(UIGestureRecognizer *)ges
-{
-    CGPoint point= [ges locationInView:self.window];
-    if (point.y<40) {
-        point.y=40;
-    }
-    self.btn.center=point;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
