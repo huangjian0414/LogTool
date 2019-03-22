@@ -15,6 +15,10 @@
 #define kLogW  [UIScreen mainScreen].bounds.size.width
 #define kLogH  [UIScreen mainScreen].bounds.size.height
 
+static NSString *key=@"hj_isLogBtnHidden";
+static NSString *logBtn_CenterX=@"hj_logBtn_CenterX";
+static NSString *logBtn_CenterY=@"hj_logBtn_CenterY";
+
 @implementation LogInfoManager
 +(instancetype)shareInstance
 {
@@ -33,14 +37,30 @@
         [btn setTitle:@"Log" forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         btn.titleLabel.font=[UIFont systemFontOfSize:14];
-        btn.frame=CGRectMake(300, 20, 40, 40);
+        btn.frame=CGRectMake(300, 40, 40, 40);
+        if ([[NSUserDefaults standardUserDefaults]objectForKey:key]) {
+            btn.hidden=[[[NSUserDefaults standardUserDefaults]objectForKey:key]boolValue];
+        }else
+        {
+            btn.hidden=YES;
+        }
         [btn setBackgroundColor:[UIColor blackColor]];
         [[UIApplication sharedApplication].keyWindow addSubview:btn];
         [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
         UIPanGestureRecognizer *pan=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panBtn:)];
         [btn addGestureRecognizer:pan];
+        if ([[NSUserDefaults standardUserDefaults]objectForKey:logBtn_CenterX]&&[[NSUserDefaults standardUserDefaults]objectForKey:logBtn_CenterY]) {
+            CGPoint center=CGPointMake([[[NSUserDefaults standardUserDefaults]objectForKey:logBtn_CenterX]floatValue], [[[NSUserDefaults standardUserDefaults]objectForKey:logBtn_CenterY]floatValue]);
+            btn.center=center;
+        }
         [LogInfoManager shareInstance].logBtn=btn;
     });
+}
+-(void)showOrDismisLogButton
+{
+    [LogInfoManager shareInstance].logBtn.hidden=![LogInfoManager shareInstance].logBtn.hidden;
+    [[NSUserDefaults standardUserDefaults]setObject:@([LogInfoManager shareInstance].logBtn.hidden) forKey:key];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 -(void)clickBtn:(UIButton *)btn
 {
@@ -67,6 +87,11 @@
         point.x=kLogW-40;
     }
     [LogInfoManager shareInstance].logBtn.center=point;
+    if (ges.state==UIGestureRecognizerStateEnded) {
+        [[NSUserDefaults standardUserDefaults]setObject:@(point.x) forKey:logBtn_CenterX];
+        [[NSUserDefaults standardUserDefaults]setObject:@(point.y) forKey:logBtn_CenterY];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
 }
 -(void)showLogInfoVC
 {

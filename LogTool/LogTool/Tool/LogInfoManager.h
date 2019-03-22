@@ -21,6 +21,7 @@
 @property(nonatomic,strong)LogViewController *logVC;
 
 -(void)start;
+-(void)showOrDismisLogButton;
 
 -(void)showLogInfoVC;
 -(void)dismissLogInfoVC;
