@@ -42,7 +42,7 @@ static NSString *logBtn_CenterY=@"hj_logBtn_CenterY";
             btn.hidden=[[[NSUserDefaults standardUserDefaults]objectForKey:key]boolValue];
         }else
         {
-            btn.hidden=YES;
+            btn.hidden=NO;
         }
         [btn setBackgroundColor:[UIColor blackColor]];
         [[UIApplication sharedApplication].keyWindow addSubview:btn];
