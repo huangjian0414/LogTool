@@ -21,7 +21,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [HJSaveLogTool removeLogFile];
+    //[HJSaveLogTool removeLogFile];
     [HJSaveLogTool redirectNSLogToDocumentFolder];
     [[LogInfoManager shareInstance]start];
     return YES;

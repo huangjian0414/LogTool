@@ -97,8 +97,8 @@ static NSString *logBtn_CenterY=@"hj_logBtn_CenterY";
 {
     self.isShowLogVC=YES;
     if (self.logInfoView) {
-        self.logInfoView.hidden=NO;
         [[LogInfoManager shareInstance].logVC startTimer];
+        self.logInfoView.hidden=NO;
     }else
     {
         LogViewController *vc= [[LogViewController alloc]init];
@@ -113,8 +113,8 @@ static NSString *logBtn_CenterY=@"hj_logBtn_CenterY";
 {
     self.isShowLogVC=NO;
     if (self.logInfoView) {
-        self.logInfoView.hidden=YES;
         [[LogInfoManager shareInstance].logVC removeTimer];
+        self.logInfoView.hidden=YES;
     }
 }
 
