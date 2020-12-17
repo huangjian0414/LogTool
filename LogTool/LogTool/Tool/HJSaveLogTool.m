@@ -25,7 +25,7 @@
     //    }
     //获取Document目录下的Log文件夹,若没有则新建
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *logDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Log"];
+    NSString *logDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"HJLog"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL fileExists = [fileManager fileExistsAtPath:logDirectory];
     if (!fileExists) {
@@ -46,7 +46,7 @@
 + (NSString *)readFromLogFile
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *logDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Log"];
+    NSString *logDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"HJLog"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL fileExists = [fileManager fileExistsAtPath:logDirectory];
     if (!fileExists) {
@@ -59,7 +59,7 @@
 +(void)removeLogFile
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *logDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Log"];
+    NSString *logDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"HJLog"];
     NSString *logFilePath = [logDirectory stringByAppendingFormat:@"/%@.txt",@"log"];
     NSFileManager *fileManage = [NSFileManager defaultManager];
     if ([fileManage fileExistsAtPath:logFilePath]) {
