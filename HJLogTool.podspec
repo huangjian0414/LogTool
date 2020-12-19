@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "HJLogTool"
-  spec.version      = "1.0.0"
+  spec.version      = "1.0.1"
   spec.summary      = "一个简单的日志输出工具"
 
   # This description is used to generate tags and improve search results.
@@ -92,6 +92,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.source_files  = "LogTool/LogTool/Tool/*.{h,m}"
+  spec.resource = 'LogTool/LogTool/Tool/HJLogTool.bundle'
   #spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"

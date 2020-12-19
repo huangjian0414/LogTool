@@ -32,9 +32,9 @@
         [fileManager createDirectoryAtPath:logDirectory withIntermediateDirectories:YES attributes:nil error:nil];
         
     }
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
+//    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     //每次启动后都保存一个新的日志文件中
     //NSString *dateStr = [formatter stringFromDate:[NSDate date]];
     NSString *logFilePath = [logDirectory stringByAppendingFormat:@"/%@.txt",@"log"];
