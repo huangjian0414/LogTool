@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface HJSaveLogTool : NSObject
+/// 保存日志文件
 + (void)redirectNSLogToDocumentFolder;
 
 + (NSString *)readFromLogFile;

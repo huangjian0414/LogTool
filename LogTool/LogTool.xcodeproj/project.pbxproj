@@ -16,6 +16,7 @@
 		7E2826A921355370002E8088 /* LogInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2826A32135536F002E8088 /* LogInfoManager.m */; };
 		7E2826AB21355370002E8088 /* HJSaveLogTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2826A721355370002E8088 /* HJSaveLogTool.m */; };
 		7EBFB2212240DD6E0064AB05 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFB2202240DD6E0064AB05 /* LogViewController.m */; };
+		87DD6ECE258DD79A00CA9238 /* HJLogTool.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 87DD6ECD258DD79A00CA9238 /* HJLogTool.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		7E2826A821355370002E8088 /* LogInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInfoManager.h; sourceTree = "<group>"; };
 		7EBFB21F2240DD6E0064AB05 /* LogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogViewController.h; sourceTree = "<group>"; };
 		7EBFB2202240DD6E0064AB05 /* LogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogViewController.m; sourceTree = "<group>"; };
+		87DD6ECC258DD3B100CA9238 /* HJLogTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJLogTool.h; sourceTree = "<group>"; };
+		87DD6ECD258DD79A00CA9238 /* HJLogTool.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HJLogTool.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,12 +87,14 @@
 		7EAE163D223A55CD00F4B36B /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				87DD6ECC258DD3B100CA9238 /* HJLogTool.h */,
 				7EBFB21F2240DD6E0064AB05 /* LogViewController.h */,
 				7EBFB2202240DD6E0064AB05 /* LogViewController.m */,
 				7E2826A52135536F002E8088 /* HJSaveLogTool.h */,
 				7E2826A721355370002E8088 /* HJSaveLogTool.m */,
 				7E2826A821355370002E8088 /* LogInfoManager.h */,
 				7E2826A32135536F002E8088 /* LogInfoManager.m */,
+				87DD6ECD258DD79A00CA9238 /* HJLogTool.bundle */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 			files = (
 				7E28269A213548B9002E8088 /* LaunchScreen.storyboard in Resources */,
 				7E282697213548B9002E8088 /* Assets.xcassets in Resources */,
+				87DD6ECE258DD79A00CA9238 /* HJLogTool.bundle in Resources */,
 				7E282695213548B8002E8088 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,15 +316,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F49XPGKUF7;
+				DEVELOPMENT_TEAM = 9C9WYVYX22;
 				INFOPLIST_FILE = LogTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxchip.BuglyTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hj.logtool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -327,15 +334,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F49XPGKUF7;
+				DEVELOPMENT_TEAM = 9C9WYVYX22;
 				INFOPLIST_FILE = LogTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxchip.BuglyTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hj.logtool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

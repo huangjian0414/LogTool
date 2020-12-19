@@ -64,6 +64,7 @@
 }
 -(void)clickBtn:(UIButton *)btn
 {
+    [self.view endEditing:YES];
     switch (btn.tag) {
         case 0:
             [[LogInfoManager shareInstance]dismissLogInfoVC];
@@ -72,7 +73,10 @@
         case 1:
             btn.selected=!btn.selected;
             if (!btn.selected) {
+                [self.timer setFireDate:[NSDate date]];
                 [self.textView scrollRangeToVisible:NSMakeRange(self.textView.text.length, 1)];
+            }else{
+                [self.timer setFireDate:[NSDate distantFuture]];
             }
             break;
         case 2:
@@ -85,6 +89,8 @@
             break;
     }
 }
+
+    
 -(void)remove
 {
     [HJSaveLogTool removeLogFile];
@@ -94,16 +100,18 @@
 }
 
 -(void)scrollToTop{
+    [self.view endEditing:YES];
     [self.textView scrollRangeToVisible:NSMakeRange(0, 0)];
     if (!self.stopLogBtn.selected) {
         self.stopLogBtn.selected = YES;
+        [self.timer setFireDate:[NSDate distantFuture]];
     }
 }
 
 -(void)share
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *logDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Log"];
+    NSString *logDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"HJLog"];
     NSString *logFilePath = [logDirectory stringByAppendingFormat:@"/%@.txt",@"log"];
     
     self.documentController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:logFilePath]];
@@ -148,55 +156,37 @@
     }
     return @"public";
 }
+    
 -(void)setUpUI
 {
     UIButton *hiddenBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [hiddenBtn setTitle:@"Dismiss" forState:UIControlStateNormal];
-    [hiddenBtn setTitleColor:defalutColor forState:UIControlStateNormal];
-    hiddenBtn.layer.borderColor=defalutColor.CGColor;
-    hiddenBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    hiddenBtn.layer.borderWidth=1;
+    [hiddenBtn setImage:[LogInfoManager getImageWithName:@"close"] forState:UIControlStateNormal];
     hiddenBtn.tag=0;
-    hiddenBtn.contentEdgeInsets=UIEdgeInsetsMake(0, 5, 0, 5);
+    hiddenBtn.contentEdgeInsets = UIEdgeInsetsMake(3, 3, 3, 3);
     [hiddenBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:hiddenBtn];
     hiddenBtn.translatesAutoresizingMaskIntoConstraints = NO;
     
     
     UIButton *stopBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [stopBtn setTitle:@"StopScroll" forState:UIControlStateNormal];
-    [stopBtn setTitle:@"StartScroll" forState:UIControlStateSelected];
-    [stopBtn setTitleColor:defalutColor forState:UIControlStateNormal];
-    stopBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    stopBtn.layer.borderColor=defalutColor.CGColor;
-    stopBtn.layer.borderWidth=1;
+    [stopBtn setImage:[LogInfoManager getImageWithName:@"pause"] forState:UIControlStateNormal];
+    [stopBtn setImage:[LogInfoManager getImageWithName:@"play"] forState:UIControlStateSelected];
     stopBtn.tag=1;
-    stopBtn.contentEdgeInsets=UIEdgeInsetsMake(0, 5, 0, 5);
     [stopBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:stopBtn];
     self.stopLogBtn=stopBtn;
     stopBtn.translatesAutoresizingMaskIntoConstraints = NO;
     
     UIButton *shareBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [shareBtn setTitle:@"Share" forState:UIControlStateNormal];
-    [shareBtn setTitleColor:defalutColor forState:UIControlStateNormal];
-    shareBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    shareBtn.layer.borderColor=defalutColor.CGColor;
-    shareBtn.layer.borderWidth=1;
     shareBtn.tag=2;
-    shareBtn.contentEdgeInsets=UIEdgeInsetsMake(0, 5, 0, 5);
+    [shareBtn setImage:[LogInfoManager getImageWithName:@"share"] forState:UIControlStateNormal];
     [shareBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:shareBtn];
     shareBtn.translatesAutoresizingMaskIntoConstraints = NO;
     
     UIButton *removeFileBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [removeFileBtn setTitle:@"Remove" forState:UIControlStateNormal];
-    [removeFileBtn setTitleColor:defalutColor forState:UIControlStateNormal];
-    removeFileBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    removeFileBtn.layer.borderColor=defalutColor.CGColor;
-    removeFileBtn.layer.borderWidth=1;
     removeFileBtn.tag=3;
-    removeFileBtn.contentEdgeInsets=UIEdgeInsetsMake(0, 5, 0, 5);
+    [removeFileBtn setImage:[LogInfoManager getImageWithName:@"delete"] forState:UIControlStateNormal];
     [removeFileBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:removeFileBtn];
     removeFileBtn.translatesAutoresizingMaskIntoConstraints = NO;
@@ -207,10 +197,12 @@
     self.textView=textView;
     textView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSArray *constraints1 =[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[hiddenBtn]-padding-[stopBtn]-padding-[shareBtn]-padding-[removeFileBtn]" options:0 metrics:@{@"left" : @(20),@"padding":@(10)} views:NSDictionaryOfVariableBindings(hiddenBtn,stopBtn,shareBtn,removeFileBtn)];
+    NSArray *constraints1 =[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-left-[hiddenBtn(30)]-padding-[stopBtn(30)]-padding-[shareBtn(30)]-padding-[removeFileBtn(30)]" options:0 metrics:@{@"left" : @(20),@"padding":@(10)} views:NSDictionaryOfVariableBindings(hiddenBtn,stopBtn,shareBtn,removeFileBtn)];
+    NSArray *constraints11 =[NSLayoutConstraint constraintsWithVisualFormat:@"V:[hiddenBtn(30)][stopBtn(30)][shareBtn(30)][removeFileBtn(30)]" options:0 metrics:@{} views:NSDictionaryOfVariableBindings(hiddenBtn,stopBtn,shareBtn,removeFileBtn)];
     NSArray *constraints2 =[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-top-[hiddenBtn]-space-[textView]-space-|" options:0 metrics:@{@"top":@(85),@"space":@(20)} views:NSDictionaryOfVariableBindings(hiddenBtn,textView)];
     NSArray *constraints3 =[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-space-[textView]-space-|" options:0 metrics:@{@"space":@(20)} views:NSDictionaryOfVariableBindings(hiddenBtn,textView)];
     [self.view addConstraints:constraints1];
+    [self.view addConstraints:constraints11];
     [self.view addConstraints:constraints2];
     [self.view addConstraints:constraints3];
     
@@ -236,40 +228,24 @@
     
     //↑ ↓
     UIButton *preBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [preBtn setTitle:@"↑" forState:UIControlStateNormal];
-    [preBtn setTitleColor:defalutColor forState:UIControlStateNormal];
-    preBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    preBtn.layer.borderColor=defalutColor.CGColor;
-    preBtn.layer.borderWidth=1;
+    [preBtn setImage:[LogInfoManager getImageWithName:@"upload"] forState:UIControlStateNormal];
     preBtn.tag = 4;
-    preBtn.contentEdgeInsets=UIEdgeInsetsMake(0, 5, 0, 5);
     [preBtn addTarget:self action:@selector(goRange:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:preBtn];
-    preBtn.frame = CGRectMake(230, 44, 30, 30);
+    preBtn.frame = CGRectMake(230, 44, 26, 26);
     
     UIButton *nextBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [nextBtn setTitle:@"↓" forState:UIControlStateNormal];
-    [nextBtn setTitleColor:defalutColor forState:UIControlStateNormal];
-    nextBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    nextBtn.layer.borderColor=defalutColor.CGColor;
-    nextBtn.layer.borderWidth=1;
+    [nextBtn setImage:[LogInfoManager getImageWithName:@"download"] forState:UIControlStateNormal];
     nextBtn.tag = 5;
-    nextBtn.contentEdgeInsets=UIEdgeInsetsMake(0, 5, 0, 5);
     [nextBtn addTarget:self action:@selector(goRange:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:nextBtn];
-    
-    nextBtn.frame = CGRectMake(265, 44, 30, 30);
+    nextBtn.frame = CGRectMake(265, 44, 26, 24);
     
     UIButton *topBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    [topBtn setTitle:@"Top" forState:UIControlStateNormal];
-    [topBtn setTitleColor:defalutColor forState:UIControlStateNormal];
-    topBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    topBtn.layer.borderColor=defalutColor.CGColor;
-    topBtn.layer.borderWidth=1;
-    topBtn.contentEdgeInsets=UIEdgeInsetsMake(0, 5, 0, 5);
+    [topBtn setImage:[LogInfoManager getImageWithName:@"top"] forState:UIControlStateNormal];
     [topBtn addTarget:self action:@selector(scrollToTop) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:topBtn];
-    topBtn.frame = CGRectMake(305, 44, 35, 30);
+    topBtn.frame = CGRectMake(305, 42, 30, 30);
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -310,6 +286,7 @@
     if (self.rangeArray.count == 0) {
         return;
     }
+    [self.view endEditing:YES];
     if (btn.tag == 4) {
         if (self.currentRange <= 0) {
             self.currentRange = self.rangeArray.count - 1;

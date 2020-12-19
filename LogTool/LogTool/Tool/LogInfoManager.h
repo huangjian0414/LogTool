@@ -25,4 +25,6 @@
 
 -(void)showLogInfoVC;
 -(void)dismissLogInfoVC;
+    
++(UIImage *)getImageWithName:(NSString *)name;
 @end

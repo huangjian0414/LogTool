@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "LogInfoManager.h"
-#import "HJSaveLogTool.h"
+#import "HJLogTool.h"
+
 @interface AppDelegate ()
 {
     UIPushBehavior *_push;

@@ -34,17 +34,15 @@ static NSString *logBtn_CenterY=@"hj_logBtn_CenterY";
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setTitle:@"Log" forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        btn.titleLabel.font=[UIFont systemFontOfSize:14];
-        btn.frame=CGRectMake(300, 40, 40, 40);
+        [btn setImage:[LogInfoManager getImageWithName:@"log"] forState:UIControlStateNormal];
+        
+        btn.frame=CGRectMake(300, 64, 40, 40);
         if ([[NSUserDefaults standardUserDefaults]objectForKey:key]) {
             btn.hidden=[[[NSUserDefaults standardUserDefaults]objectForKey:key]boolValue];
         }else
         {
             btn.hidden=NO;
         }
-        [btn setBackgroundColor:[UIColor blackColor]];
         [[UIApplication sharedApplication].keyWindow addSubview:btn];
         [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
         UIPanGestureRecognizer *pan=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panBtn:)];
@@ -118,4 +116,11 @@ static NSString *logBtn_CenterY=@"hj_logBtn_CenterY";
     }
 }
 
++(UIImage *)getImageWithName:(NSString *)name{
+    NSString * bundleNameWithExtension = @"HJLogTool.bundle/icon";
+    NSString * bundlePath = [[NSBundle bundleForClass:[LogInfoManager class]].resourcePath
+                             stringByAppendingPathComponent:bundleNameWithExtension];
+    NSBundle * bundle = [NSBundle bundleWithPath:bundlePath];
+    return [UIImage imageNamed:name inBundle:bundle compatibleWithTraitCollection:nil];
+}
 @end
