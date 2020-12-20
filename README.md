@@ -11,3 +11,15 @@
 
   `pod 'HJLogTool'`
 
+
+
+`#import "HJLogTool.h"`
+
+```
+/// 开始写入日志流到文件
+[HJSaveLogTool redirectNSLogToDocumentFolder];
+
+/// 开启日志按钮
+[[LogInfoManager shareInstance]start];
+```
+
